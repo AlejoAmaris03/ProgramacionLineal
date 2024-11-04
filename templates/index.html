@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación Lineal - Método Gráfico/Simplex</title>
+</head>
+
+<body>
+    <h1>Programación Lineal - Método Gráfico/Simplex</h1>
+
+    <form action="/plot" method="post">
+        <label for="objective_function">Función Objetivo:</label>
+        <input type="number" step="any" id="x1" name="x1" required>x1 + 
+        <input type="number" step="any" id="x2" name="x2" required>x2
+        <br><br>
+
+        <label for="x_range">Rango de valores de x: </label>
+        Rango límite: <input type="number" id="x_range_limit" name="x_range_limit" min="1" required>
+        Rango de puntos: <input type="number" id="x_range_points" name="x_range_points" min="1" required>
+        <br><br>
+
+        <label for="num_constraints">Número de Restricciones:</label>
+        <input type="number" id="num_constraints" name="num_constraints" min="1" max="10" value="0" required>
+        <br><br>
+
+        <div id="constraints">
+            <!-- Aquí se añadirán dinámicamente los campos para las restricciones -->
+        </div>
+        <br><br>
+        
+        <button type="button" onclick="addConstraint()">Agregar Restricción</button>
+        <!--<button type="button" onclick="addUniqueConstraint()">Agregar Restricción Única</button>-->
+        <br><br>
+
+        <input type="submit" value="Generar Gráfico">
+    </form>
+    <br><br>
+
+    <script>
+        let constraintCount = 0;
+
+        function addConstraint() {
+            restrictionsNumber = document.getElementById("num_constraints").value;
+
+            if (restrictionsNumber !== "0" && constraintCount < restrictionsNumber) {
+                const constraintsDiv = document.getElementById('constraints');
+                const newConstraint = document.createElement('div');
+
+                newConstraint.innerHTML = `
+                            <h4>Restricción ${constraintCount + 1}</h4>
+                            <label>a1:</label>
+                            <input type="number" step="any" name="constraint_${constraintCount}_a1" required>
+
+                            <label>a2:</label>
+                            <input type="number" step="any" name="constraint_${constraintCount}_a2" required>
+                            
+                            <select name="restrictionSign_${constraintCount}" id="restrictionSign_${constraintCount}">
+                                <option value=">=">>=</option>
+                                <option value="<="><=</option>
+                                <option value="=">=</option>
+                            </select>
+
+                            <label>b:</label>
+                            <input type="number" step="any" name="constraint_${constraintCount}_b" required>
+                            <br><br>
+                        `;
+                constraintsDiv.appendChild(newConstraint);
+
+                constraintCount++;
+            }
+        }
+    </script>
+</body>
+
+</html>
