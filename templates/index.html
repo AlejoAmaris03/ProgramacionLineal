@@ -12,6 +12,13 @@
     <h1>Programación Lineal - Método Gráfico/Simplex</h1>
 
     <form action="/plot" method="post">
+        <label for="method">Seleccione el Método: </label>
+        <select name="method" id="method">
+            <option value="graphic">Gráfico</option>
+            <option value="simplex">Simplex</option>
+        </select>
+        <br><br>
+
         <label for="objective_function">Función Objetivo:</label>
         <input type="number" step="any" id="x1" name="x1" required>x1 + 
         <input type="number" step="any" id="x2" name="x2" required>x2
@@ -32,7 +39,6 @@
         <br><br>
         
         <button type="button" onclick="addConstraint()">Agregar Restricción</button>
-        <!--<button type="button" onclick="addUniqueConstraint()">Agregar Restricción Única</button>-->
         <br><br>
 
         <input type="submit" value="Generar Gráfico">
